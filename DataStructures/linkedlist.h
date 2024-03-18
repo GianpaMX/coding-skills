@@ -5,12 +5,15 @@
 using namespace std;
 
 class LinkedList {
-    public:
+ public:
   int data;
   LinkedList *next = NULL;
 
   LinkedList(const int data);
   LinkedList(const int data, LinkedList *next);
 
-        string asString();
+  static LinkedList *fromArray(const int *array, int size);
+  static void clear(LinkedList *list);
+
+  string asString();
 };

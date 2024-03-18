@@ -59,6 +59,8 @@ int LinkedList::indexOf(const int data) {
   return -1;
 }
 
+bool LinkedList::contains(const int data) { return indexOf(data) != -1; }
+
 string LinkedList::asString() {
   string result = "";
   LinkedList *iterator = this;

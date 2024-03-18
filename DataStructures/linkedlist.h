@@ -20,6 +20,7 @@ class LinkedList {
   LinkedList *addFirst(const int data);
 
   int indexOf(const int data);
+  bool contains(const int data);
 
   string asString();
 };

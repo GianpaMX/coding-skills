@@ -22,7 +22,7 @@ int main() {
   std::cout << list->asString() << std::endl;
 
   std::cout << "Index of 10: " + to_string(list->indexOf(10)) << std::endl;
-  std::cout << "Index of 11: " + to_string(list->indexOf(11)) << std::endl;
+  std::cout << "Contains 11? " << (list->contains(11) ? "true" : "false") << std::endl;
 
   LinkedList::clear(list);
   return 0;

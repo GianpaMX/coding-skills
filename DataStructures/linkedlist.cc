@@ -30,6 +30,9 @@ LinkedList *LinkedList::add(const int data) {
 
   return this;
 }
+
+LinkedList *LinkedList::addFirst(const int data) {
+  return new LinkedList(data, this);
 }
 
 string LinkedList::asString() {

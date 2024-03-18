@@ -12,6 +12,10 @@ int main() {
 
   std::cout << list->asString() << std::endl;
   
+  list = list->addFirst(0);
+
+  std::cout << list->asString() << std::endl;
+
   LinkedList::clear(list);
   return 0;
 }

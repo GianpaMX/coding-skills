@@ -11,8 +11,13 @@ int main() {
   list = list->add(10);
 
   std::cout << list->asString() << std::endl;
-  
+
   list = list->addFirst(0);
+
+  std::cout << list->asString() << std::endl;
+
+  list = list->add(2, -1);
+  list = list->add(4, -2);
 
   std::cout << list->asString() << std::endl;
 

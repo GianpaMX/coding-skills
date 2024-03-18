@@ -16,6 +16,7 @@ class LinkedList {
   static void clear(LinkedList *list);
 
   LinkedList *add(const int data);
+  LinkedList *add(const int index, const int data);
   LinkedList *addFirst(const int data);
 
   string asString();

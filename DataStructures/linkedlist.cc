@@ -31,6 +31,18 @@ LinkedList *LinkedList::add(const int data) {
   return this;
 }
 
+LinkedList *LinkedList::add(const int index, const int data) {
+  if (index == 0) return addFirst(data);
+
+  LinkedList *node = this;
+  for (int i = 1; i < index; i++) {
+    node = node->next;
+  }
+  node->next = new LinkedList(data, node->next);
+
+  return this;
+}
+
 LinkedList *LinkedList::addFirst(const int data) {
   return new LinkedList(data, this);
 }

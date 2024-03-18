@@ -47,6 +47,18 @@ LinkedList *LinkedList::addFirst(const int data) {
   return new LinkedList(data, this);
 }
 
+int LinkedList::indexOf(const int data) {
+  int index = 0;
+  LinkedList *node = this;
+  while (node != NULL) {
+    if (node->data == data) return index;
+
+    node = node->next;
+    index++;
+  }
+  return -1;
+}
+
 string LinkedList::asString() {
   string result = "";
   LinkedList *iterator = this;

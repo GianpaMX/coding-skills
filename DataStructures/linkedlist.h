@@ -19,5 +19,7 @@ class LinkedList {
   LinkedList *add(const int index, const int data);
   LinkedList *addFirst(const int data);
 
+  int indexOf(const int data);
+
   string asString();
 };

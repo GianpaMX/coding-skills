@@ -15,5 +15,7 @@ class LinkedList {
   static LinkedList *fromArray(const int *array, int size);
   static void clear(LinkedList *list);
 
+  LinkedList *add(const int data);
+
   string asString();
 };

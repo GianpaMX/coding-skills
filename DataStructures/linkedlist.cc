@@ -21,6 +21,17 @@ void LinkedList::clear(LinkedList *list) {
   delete list;
 }
 
+LinkedList *LinkedList::add(const int data) {
+  LinkedList *lastNode = this;
+
+  while (lastNode->next != NULL) lastNode = lastNode->next;
+
+  lastNode->next = new LinkedList(data);
+
+  return this;
+}
+}
+
 string LinkedList::asString() {
   string result = "";
   LinkedList *iterator = this;

@@ -112,6 +112,8 @@ int *LinkedList::remove(int index) {
   return removeNode(iterator, previousNode);
 }
 
+int *LinkedList::removeFirst() { return remove(0); }
+
 string LinkedList::asString() {
   string result = "";
   Node *iterator = this->head;

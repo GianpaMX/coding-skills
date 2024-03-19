@@ -20,6 +20,7 @@ class LinkedList {
 
   int *removeLast();
   int *remove(int index);
+  int *removeFirst();
 
   string asString();
 

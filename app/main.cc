@@ -34,6 +34,11 @@ int main() {
   delete i;
   std::cout << list.asString() << std::endl;
 
+  int *first = list.removeFirst();
+  std::cout << "Remove first (" << to_string(*first) << ")" << std::endl;
+  delete first;
+  std::cout << list.asString() << std::endl;
+
   list.clear();
   return 0;
 }

@@ -82,6 +82,11 @@ void LinkedList::addAll(LinkedList list) {
   lastNode()->next = list.head;
 }
 
+void LinkedList::addAllFirst(LinkedList *list) {
+  list->lastNode()->next = this->head;
+  this->head = list->head;
+}
+
 int LinkedList::indexOf(const int data) {
   int index = 0;
   Node *node = this->head;

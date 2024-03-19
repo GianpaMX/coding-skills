@@ -17,6 +17,7 @@ class LinkedList {
   void addFirst(const int data);
 
   void addAll(LinkedList list);
+  void addAllFirst(LinkedList *list);
 
   int indexOf(const int data);
   bool contains(const int data);

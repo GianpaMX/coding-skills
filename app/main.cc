@@ -51,6 +51,14 @@ int main() {
   list.addAll(evenNumbersList);
   std::cout << list.asString() << std::endl;
 
+  int negativeNumbers[] = {-4, -3, -2, -1};
+  LinkedList negativeNumbersList = LinkedList::fromArray(negativeNumbers, 4);
+  std::cout << "Negative numbers: " << negativeNumbersList.asString()
+            << std::endl;
+
+  list.addAllFirst(&negativeNumbersList);
+  std::cout << list.asString() << std::endl;
+
   list.clear();
   return 0;
 }

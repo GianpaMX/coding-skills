@@ -41,7 +41,7 @@ bool LinkedList::isEmpty() { return head == nullptr; }
 
 void LinkedList::add(const int data) {
   if (isEmpty()) {
-    this->head = new Node(data);
+    addFirst(data);
     return;
   }
 
@@ -51,10 +51,12 @@ void LinkedList::add(const int data) {
 }
 
 void LinkedList::add(const int index, const int data) {
+  if (index < 0) throw std::out_of_range("negative index");
   if (index == 0) return addFirst(data);
 
   Node *node = this->head;
   for (int i = 1; i < index; i++) {
+    if (node == nullptr) throw std::out_of_range("index out of bound");
     node = node->next;
   }
   node->next = new Node(data, node->next);

@@ -1,55 +1,72 @@
 #include "linkedlist.h"
 
-LinkedList::LinkedList(int data) : LinkedList(data, NULL) {}
+class LinkedList::Node {
+ public:
+  int data;
+  Node *next = NULL;
 
-LinkedList::LinkedList(int data, LinkedList *next) : data(data), next(next) {}
+  Node(const int data);
+  Node(const int data, Node *next);
 
-LinkedList *LinkedList::fromArray(const int *array, int size) {
-  LinkedList *result = NULL;
+  static void clear(Node *head);
+};
+
+LinkedList::Node::Node(int data) : Node(data, nullptr) {}
+
+LinkedList::Node::Node(int data, Node *next) : data(data), next(next) {}
+
+void LinkedList::Node::clear(Node *head) {
+  if (head == nullptr) return;
+  clear(head->next);
+  delete head;
+}
+
+LinkedList LinkedList::fromArray(const int *array, int size) {
+  LinkedList list = LinkedList();
 
   for (int i = size - 1; i >= 0; i--) {
-    LinkedList *node = new LinkedList(array[i], result);
-    result = node;
+    Node *node = new Node(array[i], list.head);
+    list.head = node;
   }
 
-  return result;
+  return list;
 }
 
-void LinkedList::clear(LinkedList *list) {
-  if (list->next != NULL) clear(list->next);
-
-  delete list;
+void LinkedList::clear() {
+  Node::clear(this->head);
+  this->head = nullptr;
 }
 
-LinkedList *LinkedList::add(const int data) {
-  LinkedList *lastNode = this;
+bool LinkedList::isEmpty() { return head == nullptr; }
 
-  while (lastNode->next != NULL) lastNode = lastNode->next;
+void LinkedList::add(const int data) {
+  if (isEmpty()) {
+    this->head = new Node(data);
+    return;
+  }
 
-  lastNode->next = new LinkedList(data);
-
-  return this;
+  Node *lastNode = this->head;
+  while (lastNode->next != nullptr) lastNode = lastNode->next;
+  lastNode->next = new Node(data);
 }
 
-LinkedList *LinkedList::add(const int index, const int data) {
+void LinkedList::add(const int index, const int data) {
   if (index == 0) return addFirst(data);
 
-  LinkedList *node = this;
+  Node *node = this->head;
   for (int i = 1; i < index; i++) {
     node = node->next;
   }
-  node->next = new LinkedList(data, node->next);
-
-  return this;
+  node->next = new Node(data, node->next);
 }
 
-LinkedList *LinkedList::addFirst(const int data) {
-  return new LinkedList(data, this);
+void LinkedList::addFirst(const int data) {
+  this->head = new Node(data, this->head);
 }
 
 int LinkedList::indexOf(const int data) {
   int index = 0;
-  LinkedList *node = this;
+  Node *node = this->head;
   while (node != NULL) {
     if (node->data == data) return index;
 
@@ -61,14 +78,40 @@ int LinkedList::indexOf(const int data) {
 
 bool LinkedList::contains(const int data) { return indexOf(data) != -1; }
 
+int *LinkedList::removeLast() {
+  if (isEmpty()) return nullptr;
+
+  int *data = new int();
+
+  if (this->head->next == nullptr) {
+    *data = this->head->data;
+    delete this->head;
+    return data;
+  }
+
+  Node *lastNode = this->head;
+  Node *secondLastNode = NULL;
+
+  while (lastNode->next != NULL) {
+    secondLastNode = lastNode;
+    lastNode = lastNode->next;
+  }
+
+  secondLastNode->next = NULL;
+  *data = lastNode->data;
+  delete lastNode;
+
+  return data;
+}
+
 string LinkedList::asString() {
   string result = "";
-  LinkedList *iterator = this;
+  Node *iterator = this->head;
 
-  while (iterator != NULL) {
+  while (iterator != nullptr) {
     result += to_string(iterator->data);
 
-    if (iterator->next != NULL) result += " → ";
+    if (iterator->next != nullptr) result += " → ";
 
     iterator = iterator->next;
   }

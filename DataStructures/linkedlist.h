@@ -6,21 +6,23 @@ using namespace std;
 
 class LinkedList {
  public:
-  int data;
-  LinkedList *next = NULL;
+  static LinkedList fromArray(const int *array, int size);
+  void clear();
 
-  LinkedList(const int data);
-  LinkedList(const int data, LinkedList *next);
+  bool isEmpty();
 
-  static LinkedList *fromArray(const int *array, int size);
-  static void clear(LinkedList *list);
-
-  LinkedList *add(const int data);
-  LinkedList *add(const int index, const int data);
-  LinkedList *addFirst(const int data);
+  void add(const int data);
+  void add(const int index, const int data);
+  void addFirst(const int data);
 
   int indexOf(const int data);
   bool contains(const int data);
 
+  int *removeLast();
+
   string asString();
+
+ private:
+  class Node;
+  Node *head = nullptr;
 };

@@ -81,27 +81,35 @@ bool LinkedList::contains(const int data) { return indexOf(data) != -1; }
 int *LinkedList::removeLast() {
   if (isEmpty()) return nullptr;
 
-  int *data = new int();
-
-  if (this->head->next == nullptr) {
-    *data = this->head->data;
-    delete this->head;
-    return data;
-  }
-
   Node *lastNode = this->head;
-  Node *secondLastNode = NULL;
+  Node *secondLastNode = nullptr;
 
-  while (lastNode->next != NULL) {
+  while (lastNode->next != nullptr) {
     secondLastNode = lastNode;
     lastNode = lastNode->next;
   }
 
-  secondLastNode->next = NULL;
-  *data = lastNode->data;
-  delete lastNode;
+  return removeNode(lastNode, secondLastNode);
+}
 
-  return data;
+int *LinkedList::remove(int index) {
+  if (isEmpty()) throw std::out_of_range("list is empty");
+  if (index < 0) throw std::out_of_range("negative index");
+
+  Node *iterator = this->head;
+  Node *previousNode = nullptr;
+  int i = 0;
+
+  while (i < index) {
+    if (iterator->next == nullptr)
+      throw std::out_of_range("index out of bound");
+
+    previousNode = iterator;
+    iterator = iterator->next;
+    i++;
+  }
+
+  return removeNode(iterator, previousNode);
 }
 
 string LinkedList::asString() {
@@ -117,4 +125,19 @@ string LinkedList::asString() {
   }
 
   return "[" + result + "]";
+}
+
+int *LinkedList::removeNode(Node *node, Node *previousNode) {
+  if (previousNode == nullptr) {
+    this->head = node->next;
+  } else {
+    previousNode->next = node->next;
+  }
+
+  int *data = new int();
+  *data = node->data;
+
+  delete node;
+
+  return data;
 }

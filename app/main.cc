@@ -27,7 +27,11 @@ int main() {
   int *last = list.removeLast();
   std::cout << "Remove last (" << to_string(*last) << ")" << std::endl;
   delete last;
+  std::cout << list.asString() << std::endl;
 
+  int *i = list.remove(5);
+  std::cout << "Remove index 5 (" << to_string(*i) << ")" << std::endl;
+  delete i;
   std::cout << list.asString() << std::endl;
 
   list.clear();

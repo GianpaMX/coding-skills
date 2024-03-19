@@ -19,10 +19,13 @@ class LinkedList {
   bool contains(const int data);
 
   int *removeLast();
+  int *remove(int index);
 
   string asString();
 
  private:
   class Node;
   Node *head = nullptr;
+
+  int *removeNode(Node *node, Node *previousNode);
 };

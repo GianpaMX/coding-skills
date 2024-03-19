@@ -39,6 +39,16 @@ void LinkedList::clear() {
 
 bool LinkedList::isEmpty() { return head == nullptr; }
 
+int LinkedList::size() {
+  int size = 0;
+  Node *iterator = this->head;
+  while (iterator != nullptr) {
+    iterator = iterator->next;
+    size++;
+  }
+  return size;
+}
+
 void LinkedList::add(const int data) {
   if (isEmpty()) {
     addFirst(data);

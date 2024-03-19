@@ -42,6 +42,8 @@ int main() {
 
   std::cout << "Get index 3 (" << to_string(list.get(3)) << ")" << std::endl;
 
+  std::cout << "Size (" << to_string(list.size()) << ")" << std::endl;
+
   list.clear();
   return 0;
 }

@@ -10,6 +10,7 @@ class LinkedList {
   void clear();
 
   bool isEmpty();
+  int size();
 
   void add(const int data);
   void add(const int index, const int data);

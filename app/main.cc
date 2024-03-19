@@ -22,7 +22,8 @@ int main() {
   std::cout << list.asString() << std::endl;
 
   std::cout << "Index of 10: " + to_string(list.indexOf(10)) << std::endl;
-  std::cout << "Contains 11? " << (list.contains(11) ? "true" : "false") << std::endl;
+  std::cout << "Contains 11? " << (list.contains(11) ? "true" : "false")
+            << std::endl;
 
   int *last = list.removeLast();
   std::cout << "Remove last (" << to_string(*last) << ")" << std::endl;
@@ -38,6 +39,8 @@ int main() {
   std::cout << "Remove first (" << to_string(*first) << ")" << std::endl;
   delete first;
   std::cout << list.asString() << std::endl;
+
+  std::cout << "Get index 3 (" << to_string(list.get(3)) << ")" << std::endl;
 
   list.clear();
   return 0;

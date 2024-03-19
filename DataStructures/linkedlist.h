@@ -17,6 +17,7 @@ class LinkedList {
 
   int indexOf(const int data);
   bool contains(const int data);
+  int get(const int index);
 
   int *removeLast();
   int *remove(int index);

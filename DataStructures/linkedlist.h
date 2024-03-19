@@ -16,6 +16,8 @@ class LinkedList {
   void add(const int index, const int data);
   void addFirst(const int data);
 
+  void addAll(LinkedList list);
+
   int indexOf(const int data);
   bool contains(const int data);
   int get(const int index);
@@ -31,4 +33,5 @@ class LinkedList {
   Node *head = nullptr;
 
   int *removeNode(Node *node, Node *previousNode);
+  Node *lastNode();
 };

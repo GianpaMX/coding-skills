@@ -3,8 +3,8 @@
 #include "linkedlist.h"
 
 int main() {
-  int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-  LinkedList list = LinkedList::fromArray(numbers, 9);
+  int numbers[] = {1, 3, 5, 6, 7, 8, 9};
+  LinkedList list = LinkedList::fromArray(numbers, 7);
 
   std::cout << list.asString() << std::endl;
 
@@ -16,8 +16,8 @@ int main() {
 
   std::cout << list.asString() << std::endl;
 
-  list.add(2, -1);
-  list.add(4, -2);
+  list.add(2, 2);
+  list.add(4, 4);
 
   std::cout << list.asString() << std::endl;
 
@@ -43,6 +43,13 @@ int main() {
   std::cout << "Get index 3 (" << to_string(list.get(3)) << ")" << std::endl;
 
   std::cout << "Size (" << to_string(list.size()) << ")" << std::endl;
+
+  int evenNumbers[] = {12, 14, 16, 18};
+  LinkedList evenNumbersList = LinkedList::fromArray(evenNumbers, 4);
+  std::cout << "Even numbers: " << evenNumbersList.asString() << std::endl;
+
+  list.addAll(evenNumbersList);
+  std::cout << list.asString() << std::endl;
 
   list.clear();
   return 0;

@@ -55,9 +55,7 @@ void LinkedList::add(const int data) {
     return;
   }
 
-  Node *lastNode = this->head;
-  while (lastNode->next != nullptr) lastNode = lastNode->next;
-  lastNode->next = new Node(data);
+  this->lastNode()->next = new Node(data);
 }
 
 void LinkedList::add(const int index, const int data) {
@@ -74,6 +72,14 @@ void LinkedList::add(const int index, const int data) {
 
 void LinkedList::addFirst(const int data) {
   this->head = new Node(data, this->head);
+}
+
+void LinkedList::addAll(LinkedList list) {
+  if (isEmpty()) {
+    this->head = list.head;
+    return;
+  }
+  lastNode()->next = list.head;
 }
 
 int LinkedList::indexOf(const int data) {
@@ -172,4 +178,11 @@ int *LinkedList::removeNode(Node *node, Node *previousNode) {
   delete node;
 
   return data;
+}
+
+LinkedList::Node *LinkedList::lastNode() {
+  if (isEmpty()) throw std::out_of_range("list is empty");
+  Node *iterator = this->head;
+  while (iterator->next != nullptr) iterator = iterator->next;
+  return iterator;
 }

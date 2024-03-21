@@ -37,9 +37,9 @@ void LinkedList::clear() {
   this->head = nullptr;
 }
 
-bool LinkedList::isEmpty() { return head == nullptr; }
+bool LinkedList::isEmpty() const { return head == nullptr; }
 
-int LinkedList::size() {
+int LinkedList::size() const {
   int size = 0;
   Node *iterator = this->head;
   while (iterator != nullptr) {
@@ -76,7 +76,7 @@ void LinkedList::addFirst(const int data) {
 
 void LinkedList::addAll(LinkedList list) {
   if (isEmpty()) {
-    this->head = list.head;
+    addAllFirst(&list);
     return;
   }
   lastNode()->next = list.head;
@@ -87,7 +87,7 @@ void LinkedList::addAllFirst(LinkedList *list) {
   this->head = list->head;
 }
 
-int LinkedList::indexOf(const int data) {
+int LinkedList::indexOf(const int data) const {
   int index = 0;
   Node *node = this->head;
   while (node != NULL) {
@@ -99,9 +99,9 @@ int LinkedList::indexOf(const int data) {
   return -1;
 }
 
-bool LinkedList::contains(const int data) { return indexOf(data) != -1; }
+bool LinkedList::contains(const int data) const { return indexOf(data) != -1; }
 
-int LinkedList::get(const int index) {
+int LinkedList::get(const int index) const {
   if (isEmpty()) throw std::out_of_range("list is empty");
   if (index < 0) throw std::out_of_range("negative index");
 
@@ -155,19 +155,76 @@ int *LinkedList::remove(int index) {
 
 int *LinkedList::removeFirst() { return remove(0); }
 
-string LinkedList::asString() {
+LinkedList LinkedList::take(int n) const {
+  LinkedList result = LinkedList();
+  if (n == 0 || isEmpty()) return result;
+
+  Node *iterator = this->head;
+  Node *resultIterator = new Node(this->head->data);
+  result.head = resultIterator;
+
+  for (int i = 1; i < n; i++) {
+    iterator = iterator->next;
+    resultIterator->next = new Node(iterator->data);
+    resultIterator = resultIterator->next;
+  }
+
+  return result;
+}
+
+LinkedList LinkedList::drop(int n) const {
+  LinkedList result = LinkedList();
+  if (isEmpty()) return result;
+
+  Node *iterator = this->head;
+  for (int i = 0; i < n; i++) {
+    iterator = iterator->next;
+  }
+  if (iterator == nullptr) return result;
+
+  Node *resultIterator = new Node(iterator->data);
+  result.head = resultIterator;
+
+  while (iterator->next != nullptr) {
+    iterator = iterator->next;
+    resultIterator->next = new Node(iterator->data);
+    resultIterator = resultIterator->next;
+  }
+
+  return result;
+}
+
+string LinkedList::asString(const string &separator) const {
   string result = "";
   Node *iterator = this->head;
 
   while (iterator != nullptr) {
     result += to_string(iterator->data);
 
-    if (iterator->next != nullptr) result += " → ";
+    if (iterator->next != nullptr) result += separator;
 
     iterator = iterator->next;
   }
 
   return "[" + result + "]";
+}
+
+bool LinkedList::operator==(const LinkedList &rhs) const {
+  const Node *lhsIterator = this->head;
+  const Node *rhsIterator = rhs.head;
+
+  while (lhsIterator != nullptr) {
+    if (lhsIterator->data != rhsIterator->data) return false;
+
+    lhsIterator = lhsIterator->next;
+    rhsIterator = rhsIterator->next;
+  }
+
+  return lhsIterator == rhsIterator;
+}
+
+bool LinkedList::operator!=(const LinkedList &rhs) const {
+  return !(*this == rhs);
 }
 
 int *LinkedList::removeNode(Node *node, Node *previousNode) {
@@ -190,4 +247,9 @@ LinkedList::Node *LinkedList::lastNode() {
   Node *iterator = this->head;
   while (iterator->next != nullptr) iterator = iterator->next;
   return iterator;
+}
+
+std::ostream &operator<<(std::ostream &os, LinkedList const &value) {
+  os << value.asString();
+  return os;
 }

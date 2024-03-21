@@ -56,7 +56,7 @@ int main() {
   std::cout << "Negative numbers: " << negativeNumbersList.asString()
             << std::endl;
 
-  list.addAllFirst(&negativeNumbersList);
+  list.addAllFirst(negativeNumbersList);
   std::cout << list.asString() << std::endl;
 
   list.clear();

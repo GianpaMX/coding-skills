@@ -7,6 +7,10 @@ using namespace std;
 class LinkedList {
  public:
   static LinkedList fromArray(const int *array, int size);
+
+  LinkedList();
+  LinkedList(const LinkedList &other);
+  ~LinkedList();
   void clear();
 
   bool isEmpty() const;
@@ -16,8 +20,8 @@ class LinkedList {
   void add(const int index, const int data);
   void addFirst(const int data);
 
-  void addAll(LinkedList list);
-  void addAllFirst(LinkedList *list);
+  void addAll(const LinkedList &list);
+  void addAllFirst(const LinkedList &list);
 
   int indexOf(const int data) const;
   bool contains(const int data) const;
@@ -35,12 +39,14 @@ class LinkedList {
   bool operator==(const LinkedList &rhs) const;
   bool operator!=(const LinkedList &rhs) const;
 
+  LinkedList operator+(const LinkedList &rhs) const;
+  LinkedList &operator=(const LinkedList &rhs);
+
  private:
   class Node;
   Node *head = nullptr;
 
   int *removeNode(Node *node, Node *previousNode);
-  Node *lastNode();
 };
 
 std::ostream &operator<<(std::ostream &os, LinkedList const &value);

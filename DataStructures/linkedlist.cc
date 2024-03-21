@@ -9,6 +9,9 @@ class LinkedList::Node {
   Node(const int data, Node *next);
 
   static void clear(Node *head);
+  void addAll(const Node *other);
+  Node *copy() const;
+  Node *lastNode();
 };
 
 LinkedList::Node::Node(int data) : Node(data, nullptr) {}
@@ -31,6 +34,12 @@ LinkedList LinkedList::fromArray(const int *array, int size) {
 
   return list;
 }
+
+LinkedList::LinkedList() {}
+
+LinkedList::LinkedList(const LinkedList &other) { *this = other; }
+
+LinkedList::~LinkedList() { clear(); }
 
 void LinkedList::clear() {
   Node::clear(this->head);
@@ -55,7 +64,7 @@ void LinkedList::add(const int data) {
     return;
   }
 
-  this->lastNode()->next = new Node(data);
+  this->head->lastNode()->next = new Node(data);
 }
 
 void LinkedList::add(const int index, const int data) {
@@ -74,17 +83,18 @@ void LinkedList::addFirst(const int data) {
   this->head = new Node(data, this->head);
 }
 
-void LinkedList::addAll(LinkedList list) {
+void LinkedList::addAll(const LinkedList &list) {
   if (isEmpty()) {
-    addAllFirst(&list);
+    addAllFirst(list);
     return;
   }
-  lastNode()->next = list.head;
+  this->head->lastNode()->next = list.head->copy();
 }
 
-void LinkedList::addAllFirst(LinkedList *list) {
-  list->lastNode()->next = this->head;
-  this->head = list->head;
+void LinkedList::addAllFirst(const LinkedList &list) {
+  Node *result = list.head->copy();
+  result->lastNode()->next = this->head;
+  this->head = result;
 }
 
 int LinkedList::indexOf(const int data) const {
@@ -227,6 +237,48 @@ bool LinkedList::operator!=(const LinkedList &rhs) const {
   return !(*this == rhs);
 }
 
+LinkedList LinkedList::operator+(const LinkedList &rhs) const {
+  LinkedList newList = LinkedList(*this);
+  newList.addAll(rhs);
+  return newList;
+}
+
+LinkedList &LinkedList::operator=(const LinkedList &rhs) {
+  clear();
+  if (rhs.isEmpty()) return *this;
+
+  this->head = rhs.head->copy();
+
+  return *this;
+}
+
+void LinkedList::Node::addAll(const LinkedList::Node *other) {
+  if (other == nullptr) return;
+
+  this->next = other->copy();
+}
+
+LinkedList::Node *LinkedList::Node::copy() const {
+  const Node *iterator = this;
+  Node *result = new Node(this->data);
+  Node *resultIterator = result;
+
+  while (iterator->next != nullptr) {
+    resultIterator->next = new Node(iterator->next->data);
+
+    iterator = iterator->next;
+    resultIterator = resultIterator->next;
+  }
+
+  return result;
+}
+
+LinkedList::Node *LinkedList::Node::lastNode() {
+  Node *iterator = this;
+  while (iterator->next != nullptr) iterator = iterator->next;
+  return iterator;
+}
+
 int *LinkedList::removeNode(Node *node, Node *previousNode) {
   if (previousNode == nullptr) {
     this->head = node->next;
@@ -240,13 +292,6 @@ int *LinkedList::removeNode(Node *node, Node *previousNode) {
   delete node;
 
   return data;
-}
-
-LinkedList::Node *LinkedList::lastNode() {
-  if (isEmpty()) throw std::out_of_range("list is empty");
-  Node *iterator = this->head;
-  while (iterator->next != nullptr) iterator = iterator->next;
-  return iterator;
 }
 
 std::ostream &operator<<(std::ostream &os, LinkedList const &value) {

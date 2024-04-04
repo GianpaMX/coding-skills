@@ -19,3 +19,4 @@ FetchContent_MakeAvailable(Catch2)
 
 add_subdirectory(DataStructures)
 add_subdirectory(app)
+add_subdirectory(leetcode)

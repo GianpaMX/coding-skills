@@ -1,3 +1,7 @@
 add_executable(levelup-13-pairs 13-pairs.cc)
 target_include_directories(levelup-13-pairs PUBLIC "./")
 target_link_libraries(levelup-13-pairs PUBLIC Catch2::Catch2)
+
+add_executable(levelup-15-triplets 15-triplets.cc)
+target_include_directories(levelup-15-triplets PUBLIC "./")
+target_link_libraries(levelup-15-triplets PUBLIC Catch2::Catch2)

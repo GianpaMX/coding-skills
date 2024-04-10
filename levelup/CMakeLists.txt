@@ -9,3 +9,7 @@ target_link_libraries(levelup-15-triplets PUBLIC Catch2::Catch2)
 add_executable(levelup-17-mountain 17-mountain.cc)
 target_include_directories(levelup-17-mountain PUBLIC "./")
 target_link_libraries(levelup-17-mountain PUBLIC Catch2::Catch2)
+
+add_executable(levelup-19-longestband 19-longestband.cc)
+target_include_directories(levelup-19-longestband PUBLIC "./")
+target_link_libraries(levelup-19-longestband PUBLIC Catch2::Catch2)

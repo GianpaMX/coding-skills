@@ -21,3 +21,7 @@ target_link_libraries(levelup-21-rains PUBLIC Catch2::Catch2)
 add_executable(levelup-23-subarraysort 23-subarraysort.cc)
 target_include_directories(levelup-23-subarraysort PUBLIC "./")
 target_link_libraries(levelup-23-subarraysort PUBLIC Catch2::Catch2)
+
+add_executable(levelup-25-minswaps 25-minswaps.cc)
+target_include_directories(levelup-25-minswaps PUBLIC "./")
+target_link_libraries(levelup-25-minswaps PUBLIC Catch2::Catch2)

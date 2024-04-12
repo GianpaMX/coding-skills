@@ -33,3 +33,7 @@ target_link_libraries(levelup-ce-2-maxsubarraysum PUBLIC Catch2::Catch2)
 add_executable(levelup-ce-3-mindiff ce-3-mindiff.cc)
 target_include_directories(levelup-ce-3-mindiff PUBLIC "./")
 target_link_libraries(levelup-ce-3-mindiff PUBLIC Catch2::Catch2)
+
+add_executable(levelup-ce-5-busylife ce-5-busylife.cc)
+target_include_directories(levelup-ce-5-busylife PUBLIC "./")
+target_link_libraries(levelup-ce-5-busylife PUBLIC Catch2::Catch2)

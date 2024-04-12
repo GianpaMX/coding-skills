@@ -29,3 +29,7 @@ target_link_libraries(levelup-25-minswaps PUBLIC Catch2::Catch2)
 add_executable(levelup-ce-2-maxsubarraysum ce-2-maxsubarraysum.cc)
 target_include_directories(levelup-ce-2-maxsubarraysum PUBLIC "./")
 target_link_libraries(levelup-ce-2-maxsubarraysum PUBLIC Catch2::Catch2)
+
+add_executable(levelup-ce-3-mindiff ce-3-mindiff.cc)
+target_include_directories(levelup-ce-3-mindiff PUBLIC "./")
+target_link_libraries(levelup-ce-3-mindiff PUBLIC Catch2::Catch2)
